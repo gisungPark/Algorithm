@@ -1,4 +1,4 @@
-package SWEA_1208;
+package com.algorithm01.basic;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,9 +8,8 @@ import java.util.Scanner;
 public class SWEA_1208 {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		// TODO Auto-generated method stub
 
-		System.setIn(new FileInputStream("src/com/ssafy/im/input_1208.txt"));
+		//System.setIn(new FileInputStream("src/com/ssafy/im/input_1208.txt"));
 		Scanner sc = new Scanner(System.in);
 		
 		int[] map = new int[100];

@@ -1,7 +1,7 @@
-package JUNGOL1523;
+package com.algorithm01.basic;
 
 import java.util.Scanner;
-
+////////////별 삼각형1///////////////
 public class JUNGOL1523 {
 	private static int N, M;
 

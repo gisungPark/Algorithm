@@ -14,12 +14,14 @@ public class BOJ2941 {
 		int cnt=0;
 		for(int i=0; i<str.length()-2; i++) {
 			String tmp = str.substring(i,i+3);
+			
 			if(tmp.equals("dz=")) cnt++;
 		}
 		str = str.replace("dz=", " ");
 		
 		for(int i=0; i<str.length()-1; i++) {
 			String tmp = str.substring(i,i+2);
+			System.out.println(tmp);
 			if(tmp.equals("c=")) cnt++;
 			else if(tmp.equals("c-")) cnt++;
 			else if(tmp.equals("d-")) cnt++;

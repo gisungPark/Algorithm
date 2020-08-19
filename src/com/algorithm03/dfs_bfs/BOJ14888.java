@@ -2,7 +2,7 @@ package com.algorithm03.dfs_bfs;
 
 import java.util.Arrays;
 import java.util.Scanner;
-
+////////연산자 끼워넣기/////////
 public class BOJ14888 {
 
 	static int N, maxx = -2146000000, minn = 2146000000;

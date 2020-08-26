@@ -9,7 +9,7 @@ public class SWEA2382 {
 	/////////미생물 클래스 ///////////
 	static class mi{	
 		int x, y, count;	//x, y, 미생물 수
-		int dir;		// 상하좌우 : 1234
+		int dir;			// 상하좌우 : 1234
 		public mi(int x, int y, int count, int dir) {
 			super();
 			this.x = x;
@@ -74,6 +74,7 @@ public class SWEA2382 {
 					
 				}
 				
+				////////////// 같은 무리가 되는지///////////
 				for(int i=0; i<list.size(); i++) {
 					for(int j=0; j<list.size(); j++) {
 						if(i != j) {

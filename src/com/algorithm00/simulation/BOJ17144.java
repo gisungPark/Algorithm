@@ -2,11 +2,9 @@ package com.algorithm00.simulation;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class BOJ17144 {
-
 	
 	static int R, C, T, ANS;
 	static int[] dx = { 0, 1, 0, -1};
@@ -45,9 +43,13 @@ public class BOJ17144 {
 		}
 		System.out.println(ANS);
 		
-		
 	}
+	/** 
+	 * work() : 공기청정기 동작을 구현하기 위한 함수
+	 * 공기청정기를 위아래로 나누어 공기청정기 순환방향으로 미세먼지를 한칸씩 이동시킨다.
+	 **/
 	private static void work() {
+		// 윗쪽 공기청정기 순환을 위한 델타값
 		int[] dr = { -1, 0 , 1, 0};
 		int[] dc = { 0, 1, 0, -1};
 		int k=0 , x = loc[0][0], y = loc[0][1];
@@ -66,6 +68,8 @@ public class BOJ17144 {
 		map[loc[0][0]][loc[0][1]] = -1;
 		map[loc[0][0]][loc[0][1]+1] = 0;
 		
+		
+		// 아랫쪽 공기청정기 순환을 위한 델타값
 		dr = new int[] { 1, 0, -1, 0};
 		dc = new int[] { 0, 1, 0, -1};
 		k =0;
@@ -86,6 +90,13 @@ public class BOJ17144 {
 		map[loc[1][0]][loc[1][1]] = -1;
 		map[loc[1][0]][loc[1][1]+1] = 0;
 	}
+	/**
+	 * func() : 미세먼지의 확산을 구현한 함수
+	 * (r, c)에 있는 미세먼지는 인접한 네 방향으로 확산된다.
+	 * 인접한 방향에 공기청정기가 있거나, 칸이 없으면 그 방향으로는 확산이 일어나지 않는다.
+	 * 확산되는 양은 Ar,c/5이고 소수점은 버린다
+	 * (r, c)에 남은 미세먼지의 양은 Ar,c - (Ar,c/5)×(확산된 방향의 개수) 이다.
+	 */
 	private static void func() {
 		int[][] tmp = new int[R][C];
 		for(int i=0; i<R; i++) {

@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 //////////BOJ17471 게리멘더링 ////////
 public class BOJ17471 {
-
 	
 	static int N, idx, ANS = Integer.MAX_VALUE; //구역의 개수
 	static int[] values, isSelected;
@@ -53,7 +52,11 @@ public class BOJ17471 {
 		else System.out.println("-1");
 		}
 	
-	
+	/** powerSet(): 정점들의 부분집합을 구하는 함수 
+	 * 	정점들을 원소로 하는 부분집합의 모든 경우를 구하고,
+	 *	그때 부분집합의 원소들이 서로 연결될수 있는지 확인하는 작업을 진행한다. 
+	 * @param val
+	 */
 	private static void powerSet(int L) {
 		if(L==N+1) {
 			int groupA = 0;
@@ -86,7 +89,14 @@ public class BOJ17471 {
 		}
 	}
 
-
+	/**
+	 * BFS(): 넘겨받은 배열에서 val값을 가진 원소들은 같은 집합이며,
+	 * 인접리스트를 순회하며 해당 집합의 원소들이 연결되어 있는지 확인한다. 
+	 * 
+	 * @param val
+	 * @param copyOf
+	 * @return
+	 */
 	private static boolean BFS(int val, int[] copyOf) {
 		boolean[] ch = new boolean[N+1];
 		Queue<Integer> q = new LinkedList<Integer>();

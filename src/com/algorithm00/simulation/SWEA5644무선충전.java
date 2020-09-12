@@ -25,7 +25,6 @@ public class SWEA5644무선충전 {
 			this.c = c;
 			this.p = p;
 		}
-		
 	}
 	
 	static int T, N, M, A;
@@ -59,32 +58,46 @@ public class SWEA5644무선충전 {
 				charges[i] = new charge(x, y, c, p);
 				map[x][y] = -1;	
 			}
-			
 		
+			ArrayList<Integer> list1, list2;
 			int[] a = new int[]{1,1};
 			int[] b = new int[]{10,10};
-			ArrayList<Integer> list1 = new ArrayList<Integer>();
-			ArrayList<Integer> list2 = new ArrayList<Integer>();
 			int battery = 0;
-			for(int time=0; time<M; time++) {		// 이동시간만큼
-				//////////충전 
-				int cnt1 = 0, cnt2 = 0;
+			for(int time=0; time<M+1; time++) {		// 이동시간만큼
+				list1 = new ArrayList<>();
+				list2 = new ArrayList<>();
+				//////////충전 가능 거리의  BC
 				for(int i=0; i<A; i++) {
 					if(dis(a, charges[i])) list1.add(i);
 					if(dis(b, charges[i])) list2.add(i);
 				}
 				
 				int maxA =0, maxB = 0, energy = 0;
-				for(int i=0; i<list1.size(); i++) {
-					maxA = Math.max(maxA, charges[list1.get(i)].p);
-					for(int j=0; j<list2.size(); j++) {
-						maxB = Math.max(maxB, charges[list2.get(j)].p);
-						if(list1.get(i) == list2.get(j)) energy = Math.max(energy, charges[list1.get(i)].p);
-						else energy = Math.max(energy, (maxA+maxB));
+				
+				if(list1.size() == 0 && list2.size() != 0) {
+					for(int i=0; i<list2.size(); i++) {
+						energy = Math.max(energy, charges[list2.get(i)].p);
+					}
+				}else if(list1.size() != 0 && list2.size() == 0) {
+					for(int i=0; i<list1.size(); i++) {
+						energy = Math.max(energy, charges[list1.get(i)].p);
+					}
+				}else {
+					for(int i=0; i<list1.size(); i++) {
+						maxA = Math.max(maxA, charges[list1.get(i)].p);
+						for(int j=0; j<list2.size(); j++) {
+							maxB = Math.max(maxB, charges[list2.get(j)].p);
+							if(list1.get(i) == list2.get(j)) {
+								energy = Math.max(energy, charges[list1.get(i)].p);
+								maxA /= 2;
+								maxB /= 2;
+							}
+							else energy = Math.max(energy, (maxA+maxB));
+						}
 					}
 				}
 				battery += energy;
-				
+				if(time == M) break; 
 				/////////이동
 				a[0] = a[0]+dx[p1[time]];
 				a[1] = a[1]+dy[p1[time]];

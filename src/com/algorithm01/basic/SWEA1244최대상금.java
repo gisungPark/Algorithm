@@ -2,67 +2,86 @@ package com.algorithm01.basic;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-/*
-1
-777770 5
- ======= 
-1
-32888 2
-
-*/
-public class SWEA1244최대상금{
-	
-	static int T, N, ANS;
-	static ArrayList<Integer> list;
-	public static void main(String[] args) {
-		
-		Scanner sc = new Scanner(System.in);
-		T = sc.nextInt();
-		
-		for(int tc = 0; tc<T; tc++) {
-			list = new ArrayList<>();
-			String tmp = sc.next();
-			N = sc.nextInt();
-			
-			for(int i=0; i<tmp.length(); i++) {
-				list.add(tmp.charAt(i)-'0');
-			}
-			ANS = Integer.MIN_VALUE;
-			DFS(0);
-			
-			System.out.println("#"+(tc+1)+" " + ANS);
-		}
-	}
-	private static void DFS(int L) {
-		if(L == N) {
-			int tmp = 0;
-			for(int i=0; i<list.size(); i++) {
-				tmp+=list.get(i)*Math.pow(10, (list.size()-1-i));
-			}
-			ANS = Math.max(ANS, tmp);
-			return;
-		}
-		for(int i=0; i<list.size()-1; i++) {
-			for(int j=i+1; j<list.size(); j++) {
-				swap(i,j);
-				DFS(L+1);
-				swap(j,i);
-			}
-		}
-		
-	}
-	private static void swap(int first, int second) {
-		int tmp = list.get(first);
-		list.set(first, list.get(second));
-		list.set(second, tmp);
-	}
-	
+ 
+class SWEA1244최대상금{
+     
+    static int T, N;
+    static ArrayList<Integer> list;
+    public static void main(String[] args) {
+         
+        Scanner sc = new Scanner(System.in);
+        T = sc.nextInt();
+         
+        for(int tc = 0; tc<T; tc++) {
+            list = new ArrayList<>();
+            String tmp = sc.next();
+            N = sc.nextInt();
+             
+            for(int i=0; i<tmp.length(); i++) {
+                list.add(tmp.charAt(i)-'0');
+            }
+             
+            int start = 0;
+            int end = list.size()-1;
+            int round = 0;
+            boolean isOk = false;
+            while(true) {
+                if(round == N) break;
+                end = list.size()-1;
+                if(start == end) {
+                    /*
+                     * start 첨자가 배열의 끝에 도달한 경우, 배열은 이미 가장 큰 수로 정렬된 상태이다. 
+                     * 이때 부족한 자리교환 횟수를 채우기 위해 배열내에 동일한 값이 존재하는지 확인해야 한다.  
+                     * */
+                    for(int i=1; i<list.size(); i++) {
+                        if(list.get(i-1) == list.get(i)) isOk = true;
+                    }
+                    /*
+                     * 이미 정렬이 끝난상태에서 배열내 동일한 값이 존재한다면,
+                     * 더 이상의 교환 없이 종료한다.    
+                     * */
+                    if(isOk) break;
+ 
+                     
+                    /*
+                     * 동일한 값이 존재하지 않는다면,
+                     * 끝 두자리를 교환하는 작업을 반복한다.
+                     * */
+                    int swap = list.get(start);
+                    list.set(start, list.get(start-1));
+                    list.set(start-1, swap);
+                    round++;
+                    continue;
+                }
+                 
+                int minIdx = end, maxVal = Integer.MIN_VALUE;
+                while(true) {
+                    if(start==end) break;
+                    if(list.get(end) > maxVal) {
+                        maxVal = list.get(end);
+                        minIdx = end;
+                    }
+                    end--;
+                }
+                if(list.get(start)>maxVal) {
+                    start++;
+                    continue;
+                }
+                int swap = list.get(minIdx);
+                list.set(minIdx, list.get(start));
+                list.set(start, swap);
+                round++;
+                start++;
+            }
+             
+            System.out.print("#"+ (tc+1)+ " ");
+            for(int i=0; i<list.size(); i++) {
+                System.out.print(list.get(i));
+            }
+            System.out.println();
+        }
+    }
 }
-
-
-
-
 
 
 

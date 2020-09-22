@@ -1,4 +1,4 @@
-package com.algorithm01.basic;
+package com.algorithm00.im;
 
 import java.util.Arrays;
 import java.util.Scanner;

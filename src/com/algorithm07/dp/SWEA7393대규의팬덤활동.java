@@ -1,4 +1,4 @@
-package com.algorithm07.dynamic;
+package com.algorithm07.dp;
 
 import java.util.Arrays;
 import java.util.Scanner;

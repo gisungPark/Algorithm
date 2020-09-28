@@ -1,4 +1,4 @@
-package com.algorithm01.basic;
+package com.algorithm07.dp;
 
 import java.util.Scanner;
 
